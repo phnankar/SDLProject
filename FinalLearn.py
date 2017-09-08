@@ -183,24 +183,27 @@ ax.add_collection(pc)
 mapper = matplotlib.cm.ScalarMappable(norm=norm , cmap=cmap)
 mapper.set_array(df_poly2017P['2017'])
 plt.colorbar(mapper,shrink=0.4)
-#print(df_predict_display)
+print(df_predict_display)
 
 perIncreaseP = list(finalpredicted)
 perIncreaseA = list(tempListP)
+lenght = len(finalpredicted)
+fig, ax = plt.subplots()
+ind = np.arange(lenght)
+bar_width = 0.35
+opacity = 0.8
+rects1 = plt.bar(ind,perIncreaseP,bar_width,color='gold',label='Predicted%')
 
-listl = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]
-ind = np.array(listl)
-width = 0.4
-fig=plt.figure()
-ax = fig.add_subplot(111)
-rects1 = ax.bar(ind,perIncreaseP,width,color='gold')
-rects2 = ax.bar(ind+width,perIncreaseA,width,color='yellowgreen')
-
-ax.set_ylabel('Student Count')
-ax.set_xticks(ind+width)
-
+rects2 = plt.bar(ind + bar_width, perIncreaseA, bar_width,
+                 
+                 color='yellowgreen',
+                 label='Actual%')
+plt.xlabel('States')
+plt.ylabel('Energy Growth in %')
+plt.xticks(ind + bar_width,())
   
-    
-#plt.show()  
-print(df_predict_display) 
-  
+plt.legend()
+ 
+plt.tight_layout()
+plt.show() 
+print(df_predict_display)
